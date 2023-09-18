@@ -6,36 +6,26 @@ struct Item: Identifiable {
     var type: ItemType
     var categories: [ItemCategory]
     var source: ItemSource
-//    var content: ItemContent
+    var thumbnail: String?
     
     // Pull from share metadata
     struct ItemSource {
         let name: String
+        
+        var thumbnail: String {
+            name.lowercased()
+        }
     }
     
-//    struct ItemContent {
-//        var contentType: ContentType
-//        var content: Any
-//    }
-    
-    init(id: UUID = UUID(), title: String, type: ItemType, categories: [ItemCategory], source: ItemSource) {
+    init(id: UUID = UUID(), title: String, type: ItemType, categories: [ItemCategory], source: ItemSource, thumbnail: String? = nil) {
         self.id = id
         self.title = title
         self.type = type
         self.categories = categories
         self.source = source
-//        self.content = content
+        self.thumbnail = thumbnail
     }
 }
-
-//extension Item {
-//    enum ContentType: String {
-//        case image
-//        case text
-//        case video
-//        case link
-//    }
-//}
 
 extension Item {
     enum ItemType: String {
@@ -73,8 +63,8 @@ extension Item {
 extension Item {
     static let sampleData: [Item] =
     [
-        Item(title: "TIL: Jefe", type: .socialMedia, categories: [ItemCategory(name: "Shitposting"), ItemCategory(name: "r/copypasta"), ItemCategory(name: "Shitposting"), ItemCategory(name: "Shitposting")], source: ItemSource(name: "Reddit")),
-        Item(title: "Motorcycle video", type: .socialMedia, categories: [ItemCategory(name: "r/motorcycles")], source: ItemSource(name: "Reddit")),
-        Item(title: "Learn how to make burger", type: .website, categories: [ItemCategory(name: "Tutorial")], source: ItemSource(name: "YouTube")),
+        Item(title: "Basic Example", type: .socialMedia, categories: [ItemCategory(name: "Shitposting"), ItemCategory(name: "r/copypasta"), ItemCategory(name: "Shitposting"), ItemCategory(name: "Shitposting")], source: ItemSource(name: "Reddit"), thumbnail: "https://loremflickr.com/340/360"),
+        Item(title: "Basic Example 2", type: .socialMedia, categories: [ItemCategory(name: "r/motorcycles")], source: ItemSource(name: "Reddit"), thumbnail: "https://loremflickr.com/340/360"),
+        Item(title: "Test with no thumbnail", type: .website, categories: [ItemCategory(name: "Tutorial")], source: ItemSource(name: "YouTube")),
     ]
 }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CachedAsyncImage
 
 struct ItemView: View {
     var item: Item
@@ -14,7 +15,7 @@ struct ItemView: View {
             ScrollView {
                 VStack() {
                     if let thumbnail = item.thumbnail {
-                        AsyncImage(
+                        CachedAsyncImage(
                          url: URL(string: thumbnail),
                          content: { image in
                              image
@@ -26,6 +27,7 @@ struct ItemView: View {
                          },
                          placeholder: {
                              ProgressView()
+                                .frame(maxWidth: UIScreen.main.bounds.width, minHeight: 300, maxHeight: 300)
                          }
                         )
                     } else {
@@ -58,6 +60,6 @@ struct ItemView: View {
 
 struct ItemView_Previews: PreviewProvider {
     static var previews: some View {
-        ItemView(item: Item.sampleData[2])
+        ItemView(item: Item.sampleData[0])
     }
 }
